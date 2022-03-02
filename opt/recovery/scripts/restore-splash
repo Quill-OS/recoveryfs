@@ -1,14 +1,14 @@
 #!/bin/sh
 
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/bin/fbink
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/bin/fbink
 DEVICE=$(cat /opt/device)
 
 if [ "${DEVICE}" == "n705" ] || [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ]; then
 	ROW=30
-elif [ "${DEVICE}" == "n613" ]; then
+elif [ "${DEVICE}" == "n613" ] || [ "${DEVICE}" == "n236" ] || [ "${DEVICE}" == "n306" ]; then
 	ROW=37
-else
-	ROW=30
+elif [ "${DEVICE}" == "n437" ]; then
+	ROW=35
 fi
 
 /opt/bin/fbink/fbink -k -f -h -q
