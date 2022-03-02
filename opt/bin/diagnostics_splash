@@ -1,0 +1,27 @@
+#!/bin/sh
+
+FROM_FIRMWARE=`cat /boot/flags/DO_FACTORY_RESET`
+SOFT_FROM_FIRMWARE=`cat /boot/flags/DO_SOFT_RESET`
+
+DEVICE=`cat /opt/device`
+
+if [ "$DEVICE" == "n705" ] || [ "${DEVICE}" == "n905b" ] || [ "$DEVICE" == "n905c" ]; then
+	SW=650
+	SH=650
+elif [ "$DEVICE" == "n613" ]; then
+	SW=850
+	SH=850
+else
+	SW=650
+	SH=650
+fi
+
+if [ "$FROM_FIRMWARE" == "true" ]; then
+	echo "Coming from factory firmware; not showing diagnostics splash"
+elif [ "$SOFT_FROM_FIRMWARE" == "true" ]; then
+	echo "Coming from factory firmware; not showing diagnostics splash"
+else
+	cd /opt/bin/fbink
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/bin/fbink /opt/bin/fbink/fbink -k -f -h -q
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/bin/fbink /opt/bin/fbink/fbink -g file=/opt/images/diagnostics.png,w=$SW,h=$SH,halign=CENTER,valign=CENTER -M -m -q
+fi

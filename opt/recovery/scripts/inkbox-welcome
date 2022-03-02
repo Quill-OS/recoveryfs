@@ -1,0 +1,16 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/bin/fbink
+DEVICE=`cat /opt/device`
+
+if [ "${DEVICE}" == "n705" ]; then
+	SIZE=65
+elif [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ] || [ "${DEVICE}" == "n613" ]; then
+	SIZE=70
+fi
+
+/opt/bin/fbink/fbink -k -f -h -q
+sleep 1
+/opt/bin/fbink/fbink -k -f -h -q
+sleep 1
+/opt/bin/fbink/fbink -t regular=/opt/fonts/fraunces.ttf,size=${SIZE} "InkBox" -m -M -h -q
