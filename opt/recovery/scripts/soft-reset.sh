@@ -38,6 +38,12 @@ mkdir -p /mnt/config
 cd /mnt/config && busybox-initrd tar -xf /opt/recovery/restore/config.tar.xz
 cd /opt/recovery
 
+# Wiping X11 overlay data
+rm -rf /mnt/X11/rootfs/write
+rm -rf /mnt/X11/rootfs/work
+mkdir -p /mnt/X11/rootfs/work
+mkdir -p /mnt/X11/rootfs/write
+
 # Unmounting user storage device
 umount /dev/mmcblk0p4
 

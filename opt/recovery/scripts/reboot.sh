@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/bin/fbink
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/bin/fbink"
 
 sleep 2
 /opt/bin/fbink/fbink -k -f -h

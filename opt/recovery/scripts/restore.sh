@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DEVICE=$(cat /opt/device)
+
 /opt/recovery/scripts/restore-splash &
 
 yes | /opt/e2fsprogs/sbin/mkfs.ext4 /dev/mmcblk0p3 -O "^metadata_csum" -F
@@ -20,19 +22,19 @@ busybox-initrd tar -xf /opt/recovery/restore/userstore.tar.xz
 sync
 
 # According to the user's choice, we extract the desired backing file for the onboard storage
-if [ "$1" == "64" ]; then
+if [ "${1}" == "64" ]; then
         busybox-initrd tar -xf /opt/recovery/restore/onboard/onboard-64M.tar.gz
 fi
-if [ "$1" == "256" ]; then
+if [ "${1}" == "256" ]; then
         busybox-initrd tar -xf /opt/recovery/restore/onboard/onboard-256M.tar.gz
 fi
-if [ "$1" == "512" ]; then
+if [ "${1}" == "512" ]; then
         busybox-initrd tar -xf /opt/recovery/restore/onboard/onboard-512M.tar.gz
 fi
-if [ "$1" == "1024" ]; then
+if [ "${1}" == "1024" ]; then
         busybox-initrd tar -xf /opt/recovery/restore/onboard/onboard-1024M.tar.gz
 fi
-if [ "$1" == "2048" ]; then
+if [ "${1}" == "2048" ]; then
         busybox-initrd tar -xf /opt/recovery/restore/onboard/onboard-2048M.tar.gz
 fi
 sync
@@ -57,6 +59,14 @@ echo "noroot" > /tmp/root_flag
 sync
 dd if=/tmp/root_flag of=/dev/mmcblk0 bs=512 seek=79872
 sync
+rm -f /tmp/root_flag
+
+# Flashing U-Boot bootloader
+if [ "${DEVICE}" != "n306" ]; then
+	dd if=/opt/recovery/restore/u-boot_inkbox.bin of=/dev/mmcblk0 bs=1K seek=1 skip=1
+else
+	dd if=/opt/recovery/restore/u-boot_inkbox.bin of=/dev/mmcblk0 bs=1K seek=1
+fi
 
 # Flashing kernel and copying it to the boot partition for utility purposes
 cp /opt/recovery/restore/uImage-std /boot/boot
