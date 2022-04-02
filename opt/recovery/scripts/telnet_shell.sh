@@ -6,6 +6,9 @@ mount -t devpts devpts /dev/pts
 IP=$(cat /boot/flags/USBNET_IP 2>/dev/null)
 DEVICE=$(cat /opt/inkbox_device)
 
+if [ "${DEVICE}" != "n873" ] && [ "${DEVICE}" != "n236" ] && [ "${DEVICE}" != "n437" ] && [ "${DEVICE}" != "n306" ] && [ "${DEVICE}" != "emu" ] && [ "${DEVICE}" != "bpi" ]; then
+	insmod "/modules/arcotg_udc.ko"
+fi
 if [ "${DEVICE}" == "n705" ] || [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ] || [ "${DEVICE}" == "n613" ] || [ "${DEVICE}" == "n236" ] || [ "${DEVICE}" == "n437" ]; then
 	insmod "/modules/g_ether.ko"
 elif [ "${DEVICE}" == "n306" ] || [ "${DEVICE}" == "n873" ] || [ "${DEVICE}" == "bpi" ]; then
