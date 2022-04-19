@@ -65,12 +65,17 @@ rm -f /tmp/root_flag
 if [ "${DEVICE}" != "n306" ]; then
 	dd if=/opt/recovery/restore/u-boot_inkbox.bin of=/dev/mmcblk0 bs=1K seek=1 skip=1
 else
-	dd if=/opt/recovery/restore/u-boot_inkbox.bin of=/dev/mmcblk0 bs=1K seek=1
+	dd if=/opt/recovery/restore/u-boot_inkbox.imx of=/dev/mmcblk0 bs=1K seek=1
 fi
 
 # Flashing kernel and copying it to the boot partition for utility purposes
 cp /opt/recovery/restore/uImage-std /boot/boot
-dd if=/opt/recovery/restore/uImage-std of=/dev/mmcblk0 bs=512 seek=81920
+if [ "${DEVICE}" != "n306" ]; then
+	dd if=/opt/recovery/restore/uImage-std of=/dev/mmcblk0 bs=512 seek=81920
+else
+	dd if=/opt/recovery/restore/zImage-std of=/dev/mmcblk0 bs=512 seek=81920
+fi
+
 sync
 
 # Setting some flags
