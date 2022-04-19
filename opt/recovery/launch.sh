@@ -40,9 +40,9 @@ else
 	echo ${FB_UR} > /sys/class/graphics/fb0/rotate
 
 	if [ "${DEVICE}" == "n437" ]; then
-		mount --bind /lib/qt5-plugins/libkobo.so.2 /kobo/mnt/onboard/.adds/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
+		mount --bind /lib/qt5-plugins/libkobo.so.2 /opt/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
 	else
-		mount --bind /lib/qt5-plugins/libkobo.so.1 /kobo/mnt/onboard/.adds/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
+		mount --bind /lib/qt5-plugins/libkobo.so.1 /opt/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
 	fi
-	cd /opt/recovery && env QT_FONT_DPI=${DPI} QTPATH=/opt/qt-linux-5.15.2-kobo/ LD_LIBRARY_PATH="${QTPATH}lib:lib:" QT_QPA_PLATFORM=kobo ./inkbox-recovery
+	cd /opt/recovery && env QT_FONT_DPI=${DPI} LD_LIBRARY_PATH="/opt/qt-linux-5.15.2-kobo/lib:/lib" QT_QPA_PLATFORM=kobo ./inkbox-recovery
 fi
