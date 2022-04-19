@@ -64,7 +64,7 @@ rm -f /tmp/root_flag
 if [ "${DEVICE}" != "n306" ]; then
 	dd if=/opt/recovery/restore/u-boot_inkbox.bin of=/dev/mmcblk0 bs=1K seek=1 skip=1
 else
-	dd if=/opt/recovery/restore/u-boot_inkbox.imx of=/dev/mmcblk0 bs=1K seek=1
+	dd if=/opt/recovery/restore/u-boot_inkbox.bin of=/dev/mmcblk0 bs=1K seek=1
 fi
 
 # Flashing root-compliant kernel and copying it to the boot partition for utility purposes
