@@ -26,7 +26,7 @@ else
 		echo 0 > "/sys/class/leds/pmic_ledsb/brightness"
 	elif [ "${DEVICE}" == "n306" ]; then
 		FB_UR=3
-		echo 1 > "/sys/devices/platform/leds/leds/GLED" ; echo 0 > "/sys/devices/platform/leds/leds/GLED"
+		echo 1 > "/sys/devices/platform/leds/leds/GLED/brightness" ; echo 0 > "/sys/devices/platform/leds/leds/GLED/brightness"
 	elif [ "${DEVICE}" == "bpi" ]; then
 		FB_UR=0
 		echo 0 > "/sys/devices/platform/leds/leds/bpi:red:pwr/brightness"
