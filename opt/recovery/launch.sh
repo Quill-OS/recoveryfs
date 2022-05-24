@@ -4,7 +4,7 @@ DO_FACTORY_RESET=$(cat /boot/flags/DO_FACTORY_RESET 2>/dev/null)
 DO_SOFT_RESET=$(cat /boot/flags/DO_SOFT_RESET 2>/dev/null)
 DEVICE=$(cat /opt/device)
 
-if [ "${DEVICE}" == "n705" ] || [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ]; then
+if [ "${DEVICE}" == "n705" ] || [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ] || [ "${DEVICE}" == "kt" ]; then
 	DPI=187
 elif [ "${DEVICE}" == "n613" ] || [ "${DEVICE}" == "n236" ] || [ "${DEVICE}" == "n306" ]; then
 	DPI=215
@@ -33,6 +33,8 @@ else
 	elif [ "${DEVICE}" == "n236" ] || [ "${DEVICE}" == "n437" ]; then
 		FB_UR=3
 		/opt/bin/shutdown_led
+	elif [ "${DEVICE}" == "kt" ]; then
+		FB_UR=1
 	else
 		FB_UR=0
 		echo 0 > /sys/class/leds/pmic_ledsb/brightness
@@ -41,6 +43,8 @@ else
 
 	if [ "${DEVICE}" == "n437" ]; then
 		mount --bind /lib/qt5-plugins/libkobo.so.2 /opt/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
+	elif [ "${DEVICE}" == "kt" ]; then
+		mount --bind /lib/qt5-plugins/libkobo.so.3 /opt/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
 	else
 		mount --bind /lib/qt5-plugins/libkobo.so.1 /opt/qt-linux-5.15.2-kobo/plugins/platforms/libkobo.so
 	fi
