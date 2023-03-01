@@ -6,4 +6,5 @@ sleep 2
 /opt/bin/fbink/fbink -k -f -h
 /opt/bin/fbink/fbink -k -f
 /opt/bin/fbink/fbink -t regular=/opt/fonts/inter-b.ttf,size=20 "Rebooting" -m -M
-reboot
+sync
+reboot -f
