@@ -11,4 +11,4 @@ mount /dev/loop1 /tmp/update_mount
 dd if=/tmp/update_mount/uImage of=/dev/mmcblk0 bs=512 seek=81920
 sync
 
-reboot
+reboot -f

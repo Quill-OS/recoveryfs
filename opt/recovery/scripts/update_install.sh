@@ -19,4 +19,4 @@ echo "true" > /tmp/inkbox_userstore/opt/update/inkbox_updated
 sync
 sync
 
-reboot
+reboot -f

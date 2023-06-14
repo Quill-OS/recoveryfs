@@ -18,4 +18,4 @@ umount -l -f /mnt
 sync
 
 # Rebooting
-reboot
+reboot -f

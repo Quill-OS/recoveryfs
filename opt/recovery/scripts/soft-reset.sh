@@ -60,4 +60,4 @@ sync
 # Displaying welcome image and powering off
 busybox-initrd killall restore-splash
 /opt/recovery/scripts/inkbox-welcome
-poweroff
+poweroff -f
