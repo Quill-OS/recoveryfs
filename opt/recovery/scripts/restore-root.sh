@@ -68,10 +68,11 @@ else
 fi
 
 # Flashing root-compliant kernel and copying it to the boot partition for utility purposes
-cp /opt/recovery/restore/uImage-root /boot/boot
 if [ "${DEVICE}" != "n306" ]; then
+	cp /opt/recovery/restore/uImage-root /boot/boot
 	dd if=/opt/recovery/restore/uImage-root of=/dev/mmcblk0 bs=512 seek=81920
 else
+	cp /opt/recovery/restore/zImage-root /boot/boot
 	dd if=/opt/recovery/restore/zImage-root of=/dev/mmcblk0 bs=512 seek=81920
 fi
 sync

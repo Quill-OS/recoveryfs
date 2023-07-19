@@ -69,10 +69,11 @@ else
 fi
 
 # Flashing kernel and copying it to the boot partition for utility purposes
-cp /opt/recovery/restore/uImage-std /boot/boot
 if [ "${DEVICE}" != "n306" ]; then
+	cp /opt/recovery/restore/uImage-std /boot/boot
 	dd if=/opt/recovery/restore/uImage-std of=/dev/mmcblk0 bs=512 seek=81920
 else
+	cp /opt/recovery/restore/zImage-std /boot/boot
 	dd if=/opt/recovery/restore/zImage-std of=/dev/mmcblk0 bs=512 seek=81920
 fi
 

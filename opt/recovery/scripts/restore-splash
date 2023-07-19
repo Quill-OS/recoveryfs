@@ -11,9 +11,9 @@ elif [ "${DEVICE}" == "n437" ]; then
 	ROW=35
 fi
 
-/opt/bin/fbink/fbink -k -f -h -q
-/opt/bin/fbink/fbink -k -f -h -q
-/opt/bin/fbink/fbink -t regular=/opt/fonts/inter-b.ttf,size=20 "Restoring" -m -M -h -q
+/opt/bin/fbink/fbink -k -f -h -q -w
+/opt/bin/fbink/fbink -k -f -h -q -w
+/opt/bin/fbink/fbink -t regular=/opt/fonts/inter-b.ttf,size=20 "Restoring" -m -M -h -q -w
 
 while true; do
 	/opt/bin/fbink/fbink "██ ████████" -y ${ROW} -m -q
