@@ -4,8 +4,10 @@ DO_FACTORY_RESET=$(cat /boot/flags/DO_FACTORY_RESET 2>/dev/null)
 DO_SOFT_RESET=$(cat /boot/flags/DO_SOFT_RESET 2>/dev/null)
 DEVICE=$(cat /opt/device)
 
-if [ "${DEVICE}" == "n705" ] || [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ] || [ "${DEVICE}" == "kt" ]; then
+if [ "${DEVICE}" == "n705" ]; then
 	DPI=187
+elif [ "${DEVICE}" == "n905b" ] || [ "${DEVICE}" == "n905c" ] || [ "${DEVICE}" == "kt" ]; then
+	DPI=160
 elif [ "${DEVICE}" == "n613" ] || [ "${DEVICE}" == "n236" ] || [ "${DEVICE}" == "n306" ]; then
 	DPI=215
 elif [ "${DEVICE}" == "n437" ]; then
@@ -35,6 +37,7 @@ else
 		/opt/bin/shutdown_led
 	elif [ "${DEVICE}" == "kt" ]; then
 		FB_UR=1
+		modprobe zforce
 	else
 		FB_UR=0
 		echo 0 > /sys/class/leds/pmic_ledsb/brightness
